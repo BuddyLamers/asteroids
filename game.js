@@ -19,6 +19,7 @@
   Game.DV = 0.3;
   Game.MAXVEL = 2;
   Game.BULLETSPEED = 2.5;
+	Game.INVINCIBLE = true;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     for(var i=0; i < numAsteroids; i++) {
@@ -63,8 +64,8 @@
         }
       }
 
-      if (this.asteroids[i].isCollidedWith(this.ship)) {
-        // this.endGame();
+      if (!Game.INVINCIBLE && this.asteroids[i].isCollidedWith(this.ship)) {
+        this.endGame();
       };
     }
   };
@@ -113,8 +114,7 @@
     game.ctx = ctx;
     this.interval = window.setInterval(function() {
       game.step(ctx);
-    }, Game.DT); // bind
+    }, Game.DT);
   };
-
-
+	
 })(this);

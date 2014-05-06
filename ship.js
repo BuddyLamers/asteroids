@@ -31,7 +31,4 @@
     var vy = Math.sin(this.angle);
     return [vx, vy];
   };
-
-
-
 })(this);
