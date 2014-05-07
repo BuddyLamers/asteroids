@@ -12,8 +12,8 @@
     xpos = (this.pos[0] + this.vel[0])%Asteroids.Game.DIMX ;
     ypos = (this.pos[1] + this.vel[1])%Asteroids.Game.DIMY ;
 
-    this.pos[0] = (xpos > 0 ? xpos : Asteroids.Game.DIMX - xpos );
-    this.pos[1] = (ypos > 0 ? ypos : Asteroids.Game.DIMY - ypos );
+    this.pos[0] = (xpos > 0 ? xpos : Asteroids.Game.DIMX + xpos );
+    this.pos[1] = (ypos > 0 ? ypos : Asteroids.Game.DIMY + ypos );
   };
 
   MovingObject.prototype.draw = function(ctx) {
