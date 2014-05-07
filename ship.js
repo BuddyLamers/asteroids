@@ -7,6 +7,7 @@
     this.angle = 0; //in radians
   };
 
+	Ship.MAXVEL = 3;
   Ship.RADIUS = 10;
   Ship.COLOR = 'blue';
   Ship.inherits(Asteroids.MovingObject);
@@ -16,8 +17,15 @@
   };
 
   Ship.prototype.accelerate = function(thrust) {
-    this.vel[0] += thrust * this.direction_vector()[0];
-    this.vel[1] += thrust * this.direction_vector()[1];
+		var tempVel = [];
+    tempVel[0] = this.vel[0] + thrust * this.direction_vector()[0];
+    tempVel[1] = this.vel[1] + thrust * this.direction_vector()[1];
+		
+		var shipVel = Math.sqrt(Math.pow(tempVel[0],2)+Math.pow(tempVel[1],2));
+		if (shipVel < Ship.MAXVEL) {
+			this.vel[0] = tempVel[0];
+			this.vel[1] = tempVel[1];
+		};
   };
 
   Ship.prototype.fireBullet = function() {
