@@ -15,8 +15,9 @@
   Game.DIMX = 500;
   Game.DIMY = 500;
   Game.FPS = 50;
-  Game.DT = 1000/Game.FPS;   //(milliseconds)
-  Game.DV = 0.3;
+  Game.DT = 1000/Game.FPS;  //(milliseconds)
+  Game.DV = 0.1;						// incremental velocity
+  Game.DA = 0.1;						// incremental angle of rotation
   Game.MAXVEL = 2;
   Game.BULLETSPEED = 2.5;
 	Game.INVINCIBLE = true;
@@ -94,11 +95,10 @@
 
   Game.prototype.bindKeyHandlers = function() {
     game = this;
-    var dV = Game.DV;
-    key('up',    function(){ game.ship.accelerate( 0.1) });
-    key('down',  function(){ game.ship.accelerate(-0.1) });
-    key('left',  function(){ game.ship.rotate(-0.2) });
-    key('right', function(){ game.ship.rotate(+0.2) });
+    key('up',    function(){ game.ship.accelerate( Game.DV) });
+    key('down',  function(){ game.ship.accelerate(-Game.DV) });
+    key('left',  function(){ game.ship.rotate(-Game.DA) });
+    key('right', function(){ game.ship.rotate(+Game.DA) });
     key('space', function(){ game.fireBullet() });
   };
 
