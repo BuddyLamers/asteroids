@@ -3,6 +3,7 @@
 
   var Bullet = Asteroids.Bullet = function (shipPos, shipVel, shipDir) {
     var vel = this.bullVel(shipVel, shipDir)
+    this.life = 200;
     Asteroids.MovingObject.call(this, shipPos, vel, Bullet.RADIUS, Bullet.COLOR);
   };
 

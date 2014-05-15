@@ -9,7 +9,6 @@
     <script src="bullet.js"></script>
     <script src="ship.js"></script>
     <script src="game.js"></script>
-
 </head>
 <body>
     <canvas width="500" height="500"></canvas>
@@ -18,7 +17,7 @@
     <script>
         var canvas = document.getElementsByTagName("canvas")[0];
         var ctx = canvas.getContext("2d");
-        new Asteroids.Game(20).start(ctx);
+        new Asteroids.Game(10).start(ctx);
     </script>
 </body>
 </html>

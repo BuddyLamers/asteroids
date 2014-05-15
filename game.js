@@ -1,9 +1,7 @@
-
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
   var Game = Asteroids.Game = function (numAsteroids) {
-    // this.ctx = ctx
     this.asteroids = [];
     this.bullets = [];
     this.addAsteroids(numAsteroids);
@@ -15,10 +13,12 @@
   Game.DIMX = 500;
   Game.DIMY = 500;
   Game.FPS = 50;
-  Game.DT = 1000/Game.FPS;   //(milliseconds)
-  Game.DV = 0.3;
+  Game.DT = 1000/Game.FPS;  //(milliseconds)
+  Game.DV = 0.1;						// incremental velocity
+  Game.DA = 0.2;						// incremental angle of rotation
   Game.MAXVEL = 2;
   Game.BULLETSPEED = 2.5;
+	Game.INVINCIBLE = false;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     for(var i=0; i < numAsteroids; i++) {
@@ -50,32 +50,40 @@
     }
     for(var i = 0; i < this.bullets.length; i++) {
       this.bullets[i].move();
+     
+      this.bullets[i].life = this.bullets[i].life - 1;
+      // alert(this.bullets[i].life)
+			if (this.bullets[i].life === 0) {
+				this.removeObject(this.bullets, i);
+			}
     }
     this.ship.move();
   };
+	
+	Game.prototype.isOffCanvas = function(object) {
+		var x = object.pos[0];
+		var y = object.pos[1];
+		return (x > Game.DIMX || x < 0 || y > Game.DIMY || y < 0);
+	};
 
   Game.prototype.checkCollisions = function() {
     for(var i = 0; i< this.asteroids.length; i++) {
       for (var j = 0; j < this.bullets.length; j++) {
         if (this.asteroids[i].isCollidedWith(this.bullets[j])) {
-          this.removeAsteroid(i);
-          this.removeBullet(j);
+					this.removeObject(this.asteroids, i);
+					this.removeObject(this.bullets, j);
         }
       }
 
-      if (this.asteroids[i].isCollidedWith(this.ship)) {
-        // this.endGame();
+      if (!Game.INVINCIBLE && this.asteroids[i].isCollidedWith(this.ship)) {
+        this.endGame();
       };
     }
   };
-
-  Game.prototype.removeAsteroid = function(doomedAsteroidIdx) {
-    this.asteroids.splice(doomedAsteroidIdx,1);
-  };
-
-  Game.prototype.removeBullet = function(doomedBulletIdx) {
-    this.bullets.splice(doomedBulletIdx,1);
-  };
+	
+  Game.prototype.removeObject = function(object, index) {
+		object.splice(index,1);
+	}	
 
   Game.prototype.endGame = function() {
     window.alert ('You lose');
@@ -93,11 +101,10 @@
 
   Game.prototype.bindKeyHandlers = function() {
     game = this;
-    var dV = Game.DV;
-    key('up',    function(){ game.ship.accelerate( 0.1) });
-    key('down',  function(){ game.ship.accelerate(-0.1) });
-    key('left',  function(){ game.ship.rotate(-0.2) });
-    key('right', function(){ game.ship.rotate(+0.2) });
+    key('up',    function(){ game.ship.accelerate( Game.DV) });
+    key('down',  function(){ game.ship.accelerate(-Game.DV) });
+    key('left',  function(){ game.ship.rotate(-Game.DA) });
+    key('right', function(){ game.ship.rotate(+Game.DA) });
     key('space', function(){ game.fireBullet() });
   };
 
@@ -113,8 +120,7 @@
     game.ctx = ctx;
     this.interval = window.setInterval(function() {
       game.step(ctx);
-    }, Game.DT); // bind
+    }, Game.DT);
   };
-
-
+	
 })(this);
