@@ -18,7 +18,7 @@
   Game.DA = 0.2;						// incremental angle of rotation
   Game.MAXVEL = 2;
   Game.BULLETSPEED = 2.5;
-	Game.INVINCIBLE = true;
+	Game.INVINCIBLE = false;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     for(var i=0; i < numAsteroids; i++) {
