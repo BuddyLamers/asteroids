@@ -9,6 +9,22 @@
     <script src="bullet.js"></script>
     <script src="ship.js"></script>
     <script src="game.js"></script>
+
+
+<style type="text/css">
+
+canvas {
+    float: left;
+}
+
+.directions {
+    float: left;
+}
+
+
+
+</style>
+
 </head>
 <body>
     <canvas width="500" height="500"></canvas>
@@ -19,5 +35,11 @@
         var ctx = canvas.getContext("2d");
         new Asteroids.Game(10).start(ctx);
     </script>
+    <div class="directions">
+        <p>Left/Right: turn</p>
+    <p>Up/Down: move</p>
+    <p>Spacebar: fire</p>
+    </div>
+    
 </body>
 </html>
