@@ -29,7 +29,6 @@
   };
 
   Ship.prototype.fireBullet = function() {
-    console.log(this);
     return (new Asteroids.Bullet(this.pos.slice(), this.vel.slice(), this.direction_vector()));
   };
 

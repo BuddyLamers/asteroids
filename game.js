@@ -7,18 +7,17 @@
     this.addAsteroids(numAsteroids);
     this.bindKeyHandlers();
     this.ship = new Asteroids.Ship();
-    console.log(this.ship);
   };
 
   Game.DIMX = 500;
   Game.DIMY = 500;
-  Game.FPS = 50;
+  Game.FPS = 60;
   Game.DT = 1000/Game.FPS;  //(milliseconds)
   Game.DV = 0.1;						// incremental velocity
   Game.DA = 0.2;						// incremental angle of rotation
   Game.MAXVEL = 2;
   Game.BULLETSPEED = 2.5;
-	Game.INVINCIBLE = false;
+	Game.INVINCIBLE = true;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     for(var i=0; i < numAsteroids; i++) {
@@ -29,8 +28,6 @@
 
   Game.prototype.fireBullet = function() {
     this.bullets.push(this.ship.fireBullet());
-    console.log("firing bullet" + this.bullets[0]);
-    console.log(this);
   };
 
   Game.prototype.draw = function(ctx) {
@@ -99,19 +96,28 @@
     }
   };
 
+  Game.prototype.respawnAsteroids = function() {
+    if (this.asteroids.length < 3) {
+      this.addAsteroids(5);
+    };
+  };
+
   Game.prototype.bindKeyHandlers = function() {
+    console.log(this);
     game = this;
     key('up',    function(){ game.ship.accelerate( Game.DV) });
     key('down',  function(){ game.ship.accelerate(-Game.DV) });
     key('left',  function(){ game.ship.rotate(-Game.DA) });
     key('right', function(){ game.ship.rotate(+Game.DA) });
     key('space', function(){ game.fireBullet() });
+    key('p', function(){ Asteroids.Game.BULLETSPEED = 17; });
   };
 
   Game.prototype.step = function(ctx) {
     this.move();
     this.draw(ctx);
     this.checkCollisions();
+    this.respawnAsteroids();
     this.checkWin();
   };
 

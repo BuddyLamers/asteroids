@@ -9,6 +9,7 @@
     <script src="bullet.js"></script>
     <script src="ship.js"></script>
     <script src="game.js"></script>
+    <script src="jquery.js"></script>
 
 
 <style type="text/css">
@@ -29,11 +30,25 @@ canvas {
 <body>
     <canvas width="500" height="500"></canvas>
 
+    <button id="bulletspeed">Increase Bullet Speed</button>
+
     <!-- // <script src="circles.js"></script> -->
     <script>
+        
+
         var canvas = document.getElementsByTagName("canvas")[0];
         var ctx = canvas.getContext("2d");
-        new Asteroids.Game(10).start(ctx);
+        window.asteroidsGame = new Asteroids.Game(10);
+
+
+        
+
+        asteroidsGame.start(ctx);
+
+        $('#bulletspeed').click(function(){
+        Asteroids.Game.BULLETSPEED += 1;
+        });
+        
     </script>
     <div class="directions">
         <p>Left/Right: turn</p>
@@ -43,3 +58,9 @@ canvas {
     
 </body>
 </html>
+
+
+
+<script type="text/javascript">
+
+</script>
