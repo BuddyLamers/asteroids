@@ -30,9 +30,32 @@ canvas {
 <body>
     <canvas width="500" height="500"></canvas>
 
-    <button id="bulletspeed">Increase Bullet Speed</button>
+    <ul>
+    <li>
+        <!-- game speed (fps) -->
+        <button id="decrease-gamespeed">Decrease Game Speed</button>
+        <button id="increase-gamespeed">Increase Game Speed</button>
+    </li>   
+    <li>
+        <button id="decrease-bulletspeed">Decrease Bullet Speed</button>
+        <button id="increase-bulletspeed">Increase Bullet Speed</button>
+    </li> 
+    <li>
+        <!-- rotation speed DA-->
+        <button id="decrease-rotation-speed">Decrease Rotation Speed</button>
+        <button id="increase-rotation-speed">Increase Rotation Speed</button>
+    </li> 
+    <li>
+        <!-- accelleration DV -->
+        <button id="decrease-acceleration">Decrease Ship Acceleration</button>
+        <button id="increase-acceleration">Increase Ship Acceleration</button>
+    </li>
+        <!-- invincible -->
+        <button id="invincible">Become Invincible</button>
+        <button id="vincible">Become Vincible</button>
+    </ul>
+    
 
-    <!-- // <script src="circles.js"></script> -->
     <script>
         
 
@@ -48,9 +71,35 @@ canvas {
 
 
 
-        
-        $('#bulletspeed').click(function(){
-        Asteroids.Game.BULLETSPEED += 1;
+        $('#increase-game-speed').click(function(){
+        Asteroids.Game.FPS += 5;
+        });
+        $('#decrease-game-speed').click(function(){
+        Asteroids.Game.FPS -= 5;
+        });
+        $('#increase-bullet-speed').click(function(){
+        Asteroids.Game.BULLETSPEED += .5;
+        });
+        $('#decrease-bullet-speed').click(function(){
+        Asteroids.Game.BULLETSPEED -= .5;
+        });
+        $('#increase-rotation-speed').click(function(){
+        Asteroids.Game.DA += .05;
+        });
+        $('#decrease-rotation-speed').click(function(){
+        Asteroids.Game.DA -= .05;
+        });
+        $('#increase-accelleration').click(function(){
+        Asteroids.Game.DV += .025;
+        });
+        $('#decrease-accelleration').click(function(){
+        Asteroids.Game.DV -= .025;
+        });
+        $('#invincible').click(function(){
+        Asteroids.Game.INVINCIBLE = true;
+        });
+        $('#vincible').click(function(){
+        Asteroids.Game.INVINCIBLE = false;
         });
         
     </script>
