@@ -30,6 +30,26 @@
     this.bullets.push(this.ship.fireBullet());
   };
 
+  Game.prototype.splitAsteroid = function(hit_asteroid, arr, idx) {
+    var that = this;
+    hit_asteroid.size -= 1;
+    
+    if (hit_asteroid.size >= 0) {
+     this.removeObject(arr, idx);
+     
+   // randomize new velocities
+   var new_vel_1 = [hit_asteroid.vel[0] * ((Math.random()*2) - 1) + ((Math.random()*2) - 1),
+   hit_asteroid.vel[1] * ((Math.random()*2) - 1) + ((Math.random()*2) - 1)];
+   var new_vel_2 = [hit_asteroid.vel[0] * ((Math.random()*2) - 1), hit_asteroid.vel[1] * ((Math.random()*2) - 1)];
+   var pos = hit_asteroid.pos;
+   
+   this.asteroids.push(
+    new Asteroids.Asteroid(pos.slice(), new_vel_2, hit_asteroid.size),
+    new Asteroids.Asteroid(pos.slice(), new_vel_1, hit_asteroid.size)
+    );
+ }
+};
+
   Game.prototype.draw = function(ctx) {
     ctx.clearRect(0, 0, Game.DIMX, Game.DIMY);
     for(var i = 0; i < this.asteroids.length; i++) {
@@ -67,8 +87,8 @@
     for(var i = 0; i< this.asteroids.length; i++) {
       for (var j = 0; j < this.bullets.length; j++) {
         if (this.asteroids[i].isCollidedWith(this.bullets[j])) {
-					this.removeObject(this.asteroids, i);
-					this.removeObject(this.bullets, j);
+          this.removeObject(this.bullets, j);
+					this.splitAsteroid(this.asteroids[i], this.asteroids, i);
         }
       }
 
