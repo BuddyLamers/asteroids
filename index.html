@@ -16,10 +16,18 @@
 
 canvas {
     float: left;
+    border: 5px solid black;
+    margin: 0px, 100px, 100px, 100px;
 }
 
 .directions {
     float: left;
+    margin-left: 20px;
+}
+
+ul {
+    list-style: none;
+    margin-left: 20px;
 }
 
 
@@ -30,12 +38,7 @@ canvas {
 <body>
     <canvas width="500" height="500"></canvas>
 
-    <ul>
-    <li>
-        <!-- game speed (fps) -->
-        <button id="decrease-gamespeed">Decrease Game Speed</button>
-        <button id="increase-gamespeed">Increase Game Speed</button>
-    </li>   
+    <ul>  
     <li>
         <button id="decrease-bulletspeed">Decrease Bullet Speed</button>
         <button id="increase-bulletspeed">Increase Bullet Speed</button>
@@ -71,12 +74,6 @@ canvas {
 
 
 
-        $('#increase-game-speed').click(function(){
-        Asteroids.Game.FPS += 5;
-        });
-        $('#decrease-game-speed').click(function(){
-        Asteroids.Game.FPS -= 5;
-        });
         $('#increase-bullet-speed').click(function(){
         Asteroids.Game.BULLETSPEED += .5;
         });
@@ -89,10 +86,10 @@ canvas {
         $('#decrease-rotation-speed').click(function(){
         Asteroids.Game.DA -= .05;
         });
-        $('#increase-accelleration').click(function(){
+        $('#increase-acceleration').click(function(){
         Asteroids.Game.DV += .025;
         });
-        $('#decrease-accelleration').click(function(){
+        $('#decrease-acceleration').click(function(){
         Asteroids.Game.DV -= .025;
         });
         $('#invincible').click(function(){
@@ -104,6 +101,7 @@ canvas {
         
     </script>
     <div class="directions">
+        <p>The ship starts invincible!</p>
         <p>Left/Right: turn</p>
     <p>Up/Down: move</p>
     <p>Spacebar: fire</p>
