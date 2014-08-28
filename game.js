@@ -69,7 +69,7 @@
       this.bullets[i].move();
      
       this.bullets[i].life = this.bullets[i].life - 1;
-      // alert(this.bullets[i].life)
+      
 			if (this.bullets[i].life === 0) {
 				this.removeObject(this.bullets, i);
 			}
@@ -105,7 +105,7 @@
   Game.prototype.endGame = function() {
     window.alert ('You lose');
     window.clearInterval(this.interval);
-    // should restart game aftere collision
+    // to restart game after collision
     // this.start(ctx);
   };
 
@@ -123,7 +123,6 @@
   };
 
   Game.prototype.bindKeyHandlers = function() {
-    console.log(this);
     game = this;
     key('up',    function(){ game.ship.accelerate( Game.DV) });
     key('down',  function(){ game.ship.accelerate(-Game.DV) });
